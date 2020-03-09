@@ -3,6 +3,7 @@ package edu.vt.cs.cs5254.criminalintent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,9 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import java.util.*
+private const val TAG = "CrimeFragment"
+private const val ARG_CRIME_ID = "crime_id"
 
 class CrimeFragment : Fragment() {
 
@@ -17,11 +21,6 @@ class CrimeFragment : Fragment() {
     private lateinit var titleField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        crime = Crime()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +40,16 @@ class CrimeFragment : Fragment() {
 
         return view
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        crime = Crime()
+
+
+    val crimeId: UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
+        Log.d(TAG, "args bundle crime ID: $crimeId")
+        // Eventually, load crime from database
+        }
 
     override fun onStart() {
         super.onStart()
@@ -78,5 +87,17 @@ class CrimeFragment : Fragment() {
             }
         }
 }
+    companion object {
+        fun newInstance(crimeID: UUID): CrimeFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_CRIME_ID, crimeID)
+            }
+            return  CrimeFragment().apply {
+                arguments = args
+            }
+        }
+    }
+
+
         }
 
