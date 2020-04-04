@@ -1,10 +1,7 @@
 package edu.vt.cs.cs5254.criminalintent.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import edu.vt.cs.cs5254.criminalintent.Crime
 import java.util.*
 
@@ -22,5 +19,7 @@ interface CrimeDao {
 
     @Insert
     fun addCrime(crime: Crime)
+
+
 
 }

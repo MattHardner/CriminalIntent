@@ -1,6 +1,7 @@
 package edu.vt.cs.cs5254.criminalintent
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import edu.vt.cs.cs5254.criminalintent.database.CrimeDatabase
@@ -41,12 +42,14 @@ class CrimeRepository private constructor(context: Context){
         private var INSTANCE: CrimeRepository? = null
 
         fun initialize(context: Context) {
+            Log.d("test", "initialize")
             if (INSTANCE == null) {
                 INSTANCE = CrimeRepository(context)
             }
         }
 
         fun get(): CrimeRepository {
+            Log.d("test", "get()")
             return INSTANCE ?:
                     throw IllegalStateException("CrimeRepository must be initialized")
         }
